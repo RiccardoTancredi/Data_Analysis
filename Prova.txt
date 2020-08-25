@@ -1,0 +1,30 @@
+La compatibilità tra l'elemento 1 e 2 è: 
+Buona, r = 0.894
+La compatibilità tra l'elemento 1 e 3 è: 
+Scarsa r = 2.942
+La compatibilità tra l'elemento 1 e 4 è: 
+Sufficiente r = 1.131
+La compatibilità tra l'elemento 1 e 5 è: 
+Buona, r = 0.312
+La compatibilità tra l'elemento 1 e 6 è: 
+Incompatibilità r = 4.459
+La compatibilità tra l'elemento 2 e 3 è: 
+Buona, r = 0.498
+La compatibilità tra l'elemento 2 e 4 è: 
+Buona, r = 0.179
+La compatibilità tra l'elemento 2 e 5 è: 
+Buona, r = 0.743
+La compatibilità tra l'elemento 2 e 6 è: 
+Sufficiente r = 1.533
+La compatibilità tra l'elemento 3 e 4 è: 
+Sufficiente r = 1.373
+La compatibilità tra l'elemento 3 e 5 è: 
+Incompatibilità r = 3.153
+La compatibilità tra l'elemento 3 e 6 è: 
+Incompatibilità r = 3.479
+La compatibilità tra l'elemento 4 e 5 è: 
+Buona, r = 0.937
+La compatibilità tra l'elemento 4 e 6 è: 
+Incompatibilità r = 3.087
+La compatibilità tra l'elemento 5 e 6 è: 
+Incompatibilità r = 4.8
