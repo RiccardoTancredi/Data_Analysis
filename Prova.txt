@@ -1,30 +1,38 @@
-La compatibilità tra l'elemento 1 e 2 è: 
+La compatibilitï¿½ tra l'elemento 1 e 2 ï¿½: 
 Buona, r = 0.894
-La compatibilità tra l'elemento 1 e 3 è: 
+La compatibilitï¿½ tra l'elemento 1 e 3 ï¿½: 
 Scarsa r = 2.942
-La compatibilità tra l'elemento 1 e 4 è: 
+La compatibilitï¿½ tra l'elemento 1 e 4 ï¿½: 
 Sufficiente r = 1.131
-La compatibilità tra l'elemento 1 e 5 è: 
+La compatibilitï¿½ tra l'elemento 1 e 5 ï¿½: 
 Buona, r = 0.312
-La compatibilità tra l'elemento 1 e 6 è: 
-Incompatibilità r = 4.459
-La compatibilità tra l'elemento 2 e 3 è: 
+La compatibilitï¿½ tra l'elemento 1 e 6 ï¿½: 
+Incompatibilitï¿½ r = 4.459
+La compatibilitï¿½ tra l'elemento 2 e 3 ï¿½: 
 Buona, r = 0.498
-La compatibilità tra l'elemento 2 e 4 è: 
+La compatibilitï¿½ tra l'elemento 2 e 4 ï¿½: 
 Buona, r = 0.179
-La compatibilità tra l'elemento 2 e 5 è: 
+La compatibilitï¿½ tra l'elemento 2 e 5 ï¿½: 
 Buona, r = 0.743
-La compatibilità tra l'elemento 2 e 6 è: 
+La compatibilitï¿½ tra l'elemento 2 e 6 ï¿½: 
 Sufficiente r = 1.533
-La compatibilità tra l'elemento 3 e 4 è: 
+La compatibilitï¿½ tra l'elemento 3 e 4 ï¿½: 
 Sufficiente r = 1.373
-La compatibilità tra l'elemento 3 e 5 è: 
-Incompatibilità r = 3.153
-La compatibilità tra l'elemento 3 e 6 è: 
-Incompatibilità r = 3.479
-La compatibilità tra l'elemento 4 e 5 è: 
+La compatibilitï¿½ tra l'elemento 3 e 5 ï¿½: 
+Incompatibilitï¿½ r = 3.153
+La compatibilitï¿½ tra l'elemento 3 e 6 ï¿½: 
+Incompatibilitï¿½ r = 3.479
+La compatibilitï¿½ tra l'elemento 4 e 5 ï¿½: 
 Buona, r = 0.937
-La compatibilità tra l'elemento 4 e 6 è: 
-Incompatibilità r = 3.087
-La compatibilità tra l'elemento 5 e 6 è: 
-Incompatibilità r = 4.8
+La compatibilitï¿½ tra l'elemento 4 e 6 ï¿½: 
+Incompatibilitï¿½ r = 3.087
+La compatibilitï¿½ tra l'elemento 5 e 6 ï¿½: 
+Incompatibilitï¿½ r = 4.8
+
+Il coefficiente angolare 'b' vale: 25.593732037758326
+L'incertezza sul coefficiente angolare vale:: 0.00667178220523533
+IL'intercetta 'a' della retta vale: -0.020813709210868187
+L'incertezza sull'intercetta vale: 4.536286603593011e-05
+
+L'indice di correlazione di Pearson vale: $\Rho = 0.9570464043609435 $
+
