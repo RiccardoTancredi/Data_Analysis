@@ -354,7 +354,7 @@ def grafico_relazione(b, a, y, errore_y, x, errore_x = None):
 # In[12]:
 
 
-def chi_square(b, a, y:list, errore_y:list, docs:bool = False):
+def chi_square(b, a, y:list, errore_y:list, x:list, docs:bool = False):
     #vincoli = N-2 -- caso interpolazione
     chi_quadro = 0
     output = ""
