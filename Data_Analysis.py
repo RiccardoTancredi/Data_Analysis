@@ -10,11 +10,47 @@ import math as m
 from scipy.odr import *
 py.offline.init_notebook_mode(connected=True)
 import plotly.graph_objs as go
+import sympy as sp
+
+
+# # Media
+
+# In[2]:
+
+
+def mean(x:list):
+    return sum(x)/len(x)
+
+
+# # Deviazione standard $\sigma$
+
+# In[3]:
+
+
+def std(x:list):
+    media = mean(x)
+    return m.sqrt((sum([(i-media)**2 for i in x]))/(len(x)-1))
+
+
+# # Deviazione standard della media $\sigma_{\bar{x}}$
+
+# In[4]:
+
+
+def std_mean(x:list):
+    media = mean(x)
+    return m.sqrt((sum([(i-media)**2 for i in x]))/(len(x)-1))/m.sqrt(len(x))
+
+
+# In[ ]:
+
+
+
 
 
 # # Compatibilità
 
-# In[2]:
+# In[5]:
 
 
 def compatibilità(x, errore_x, y, errore_y, docs:bool = False):
@@ -37,7 +73,7 @@ def compatibilità(x, errore_x, y, errore_y, docs:bool = False):
     return r
 
 
-# In[3]:
+# In[6]:
 
 
 def compatibilità_list(x:list, errore_x:list, docs:bool = False):
@@ -69,7 +105,7 @@ def compatibilità_list(x:list, errore_x:list, docs:bool = False):
 # 
 # # Media Ponderata
 
-# In[4]:
+# In[7]:
 
 
 def media_ponderata(x:list, errore_x:list, docs:bool = False):
@@ -90,7 +126,7 @@ def media_ponderata(x:list, errore_x:list, docs:bool = False):
     output += f"La media ponderata vale: {media}\n"
     output += f"La sue incertezza è: {errore_media}\n"
     print("La media ponderata vale: ", media)
-    print("La sue incertezza è: ", errore_media)
+    print("La sua incertezza è: ", errore_media)
     if docs:
         return output
     return media, errore_media
@@ -98,7 +134,7 @@ def media_ponderata(x:list, errore_x:list, docs:bool = False):
 
 # # Coefficiente di Pearson
 
-# In[5]:
+# In[8]:
 
 
 def coefficiente_Pearson(x:list, y:list, docs:bool = False):
@@ -127,7 +163,7 @@ def coefficiente_Pearson(x:list, y:list, docs:bool = False):
 
 # # Covarianza
 
-# In[6]:
+# In[9]:
 
 
 def covarianza(x:list, y:list):
@@ -143,7 +179,7 @@ def covarianza(x:list, y:list):
 # # INTERPOLAZIONE LINEARE  $y = a + bx $
 # 
 
-# In[7]:
+# In[10]:
 
 
 def interpolazione(y:list, errore_y:list, x:list, errore_x = None, docs:bool = False):
@@ -175,7 +211,7 @@ def interpolazione(y:list, errore_y:list, x:list, errore_x = None, docs:bool = F
     return b, errore_b, a, errore_a
 
 
-# In[8]:
+# In[11]:
 
 
 def interpolazione_no_errore(x:list, y:list, errore_y, docs:bool = False):
@@ -203,7 +239,7 @@ def interpolazione_no_errore(x:list, y:list, errore_y, docs:bool = False):
 # 
 # # Grafico
 
-# In[9]:
+# In[12]:
 
 
 def grafico(b, a, y, errore_y, x, errore_x = None):
@@ -280,7 +316,7 @@ def grafico(b, a, y, errore_y, x, errore_x = None):
     py.offline.iplot(fig)
 
 
-# In[10]:
+# In[13]:
 
 
 def grafico_relazione(b, a, y, errore_y, x, errore_x = None):
@@ -365,19 +401,19 @@ def grafico_relazione(b, a, y, errore_y, x, errore_x = None):
 
 
 
-# In[11]:
+# In[14]:
 
 
 #z = interpolazione(velocità2, errore_velocità2, raggi_quadro2, None)
 
 
-# In[12]:
+# In[15]:
 
 
 #grafico(z[0], z[2], velocità2, errore_velocità2, raggi_quadro2)
 
 
-# In[13]:
+# In[16]:
 
 
 def chi_square(b, a, y:list, errore_y:list, x:list, docs:bool = False):
@@ -395,7 +431,15 @@ def chi_square(b, a, y:list, errore_y:list, x:list, docs:bool = False):
     return chi_quadro
 
 
-# In[14]:
+def chi_squared_2(y, sigma_y ,x, a, b, c):
+    chi_quadro = 0
+    for i in range(len(y)):
+        chi_quadro += ((y[i] - (a*x[i]**2 + b*x[i] +c))/sigma_y[i])**2
+    print("Con D.O.F = ", len(y) - 3)
+    return chi_quadro
+
+
+# In[17]:
 
 
 def errore_posteriori(b, a, y:list, x:list, docs:bool = False):
@@ -411,7 +455,7 @@ def errore_posteriori(b, a, y:list, x:list, docs:bool = False):
     return errore_a_posteriori
 
 
-# In[15]:
+# In[18]:
 
 
 def t_Student(rho, N):
@@ -422,7 +466,7 @@ def t_Student(rho, N):
 
 # # Andamento temporale
 
-# In[16]:
+# In[19]:
 
 
 def andamento_temporale_relazione(b, a, y:list, errore_y, x:list, x_axis_name = "Occorrenze" ,colore = "#EF553B"):
@@ -472,7 +516,7 @@ def andamento_temporale_relazione(b, a, y:list, errore_y, x:list, x_axis_name = 
     fig.show()
 
 
-# In[17]:
+# In[20]:
 
 
 def andamento_temporale(b, a, y:list, errore_y:list, x:list):
@@ -517,7 +561,7 @@ def andamento_temporale(b, a, y:list, errore_y:list, x:list):
     fig.show()
 
 
-# In[18]:
+# In[21]:
 
 
 def traccia(y, errore_y, x, errore_x = None, modo = 'markers'):
@@ -540,9 +584,8 @@ def traccia(y, errore_y, x, errore_x = None, modo = 'markers'):
     return traccia1
 
 def retta(b, a, y, errore_y, x, errore_x = None):
-    max_x, min_x = max(x), min(x)
-    t_max = max_x if max_x >= abs(min_x) else min_x
-    t = np.linspace(-t_max, t_max, 1000) 
+    t_max, t_min = max(x), min(x)
+    t = np.linspace(t_min, t_max, 10000) 
     lalla = a + b*t
     retta1 = go.Scatter(
         x = t,
@@ -557,6 +600,82 @@ def retta(b, a, y, errore_y, x, errore_x = None):
     )
 
     return retta1
+
+def retta_verticale(y, x, length = None):
+    j = np.linspace(min(y), max(y), 10000)
+    if x != list(x):
+        t = [x]*length
+    else: 
+        t = x
+    retta1 = go.Scatter(
+        x = t,
+        y = j,
+        mode = 'lines',
+        name = "Retta"
+        #name = '$y = (25.594x - 0.02081) cm/s $',
+#             line = dict(
+#             shape='spline',
+#             color = 'orange'
+#        )  
+    )
+    return retta1
+
+
+def parabola(a, b, c, y, x):
+    t_max, t_min = max(x), min(x)
+    t = np.linspace(t_min, t_max, 1000) 
+    lalla = a*t**2 + b*t + c
+    retta1 = go.Scatter(
+        x = t,
+        y = lalla,
+        mode = 'lines',
+        name = "Parabola"
+        #name = '$y = (25.594x - 0.02081) cm/s $',
+#             line = dict(
+#             shape='spline',
+#             color = 'orange'
+#        )  
+    )
+
+    return retta1
+
+def cubica(a, b, c, d, y, x):
+    t_max, t_min = max(x), min(x)
+    t = np.linspace(t_min, t_max, 1000) 
+    lalla = a*t**3 + b*t**2 + c*t + d
+    retta1 = go.Scatter(
+        x = t,
+        y = lalla,
+        mode = 'lines',
+        name = "Cubica"
+        #name = '$y = (25.594x - 0.02081) cm/s $',
+#             line = dict(
+#             shape='spline',
+#             color = 'orange'
+#        )  
+    )
+
+    return retta1
+
+
+def quadrata(a, b, c, d, e, y, x):
+    t_max, t_min = max(x), min(x)
+    t = np.linspace(t_min, t_max, 1000) 
+    lalla = a*t**4 + b*t**3 + c*t**2 + d*t + e
+    retta1 = go.Scatter(
+        x = t,
+        y = lalla,
+        mode = 'lines',
+        name = "Quadrata"
+        #name = '$y = (25.594x - 0.02081) cm/s $',
+#             line = dict(
+#             shape='spline',
+#             color = 'orange'
+#        )  
+    )
+
+    return retta1
+
 
 def Layout():
     layout = go.Layout(
@@ -578,16 +697,17 @@ def Layout():
 
 
 
-# In[19]:
+# In[22]:
 
 
-def traccia_relazione(y, errore_y, x, errore_x = None):
+def traccia_relazione(y, errore_y, x, errore_x = None, modo = 'markers'):
     #l = np.linspace(0,99,100)
     traccia1 = go.Scatter(
         x = x,
         y = y,
-        mode = str(input("Inserisci il mode per la traccia: lines, markers, markers+lines ")),
+        mode = str(modo),
         name= "$" + str(input("Inserisci la legenda della traccia ") ) +"$",
+#          name= str(input("Inserisci la legenda della traccia ") ) ,
         showlegend=True,
         error_y=dict(
                 type='data',
@@ -601,18 +721,17 @@ def traccia_relazione(y, errore_y, x, errore_x = None):
     return traccia1
 
 def retta_relazione(b:float, a:float, y, errore_y, x, errore_x = None):
-    i = int(input("Scegli di quanto vuoi arrotondare b: ") )
-    j = int(input("Scegli di quanto vuoi arrotondare a: ") )
-    max_x, min_x = max(x), min(x)
-    t_max = max_x if max_x >= abs(min_x) else min_x
-    t = np.linspace(-t_max, t_max, 1000)
-    lalla = float(round(a,j)) + float( round(b,i))*t
+#     i = int(input("Scegli di quanto vuoi arrotondare b: ") )
+#     j = int(input("Scegli di quanto vuoi arrotondare a: ") )
+    t_max, t_min = max(x), min(x)
+    t = np.linspace(t_min, t_max, 1000) 
+    lalla = a + b*t
     if a >= 0:
         retta1 = go.Scatter(
             x = t,
             y = lalla,
             mode = 'lines',
-            name = str("$y = " + "("+str(float(round(b,i)))+ "x +" + str(float(round(a,j))) +")" + str( input("Inserisci l'unità di misura della legenda: "))+"$")
+            name = str("$y = " + "("+str(b)+ "x +" + str(a) +")" + str( input("Inserisci l'unità di misura della legenda: "))+"$")
             #name = '$y = (25.594x - 0.02081) cm/s $',
     #             line = dict(
     #             shape='spline',
@@ -624,7 +743,7 @@ def retta_relazione(b:float, a:float, y, errore_y, x, errore_x = None):
             x = t,
             y = lalla,
             mode = 'lines',
-            name = str("$y = " + "("+str(float(round(b,i)))+ "x" + str(float(round(a,j))) +")" + str( input("Inserisci l'unità di misura della legenda: "))+"$")
+            name = str("$y = " + "("+str(b)+ "x" + str(a) +")" + str( input("Inserisci l'unità di misura della legenda: "))+"$")
             #name = '$y = (25.594x - 0.02081) cm/s $',
     #             line = dict(
     #             shape='spline',
@@ -645,13 +764,29 @@ def Layout_relazione():
     )
     return layout
     
+def Layout_relazione_no_units():
+    layout = go.Layout(
+        title= str(input("Inserisci il nome del grafico ") ),
+        yaxis=dict(
+#                 title = str("$"+str(input("Inserisci il titolo dell'asse y ") ) + " [" +str(input("Inserisci l'unità di misura ")+ "]" + "$"))
+                title = str("$"+str(input("Inserisci il titolo dell'asse y ") ) + "$")
+        ),
+        xaxis=dict(
+            title= str("$" + str(input("Inserisci il titolo dell'asse x ") ) + "$"),
+        )
+    )
+    return layout
+    
 
 
-# In[20]:
+# In[23]:
 
 
-def Grafico(x:list, layout):
+def Grafico(x:list, layout, log_x = False):
     fig = go.Figure(data=x, layout=layout)
+#     fig.show()
+    if log_x:
+        fig.update_xaxes(type="log")
     fig.show()
 
 
@@ -659,7 +794,7 @@ def Grafico(x:list, layout):
 
 # # $y = bx + a$
 
-# In[21]:
+# In[24]:
 
 
 def f(B, x):
@@ -676,20 +811,38 @@ def linear_fit(x, y, sigma_x, sigma_y, b, a):
     myodr = ODR(mydata, linear, beta0=[b, a])
     myoutput = myodr.run()
     myoutput.pprint()
-    return myoutput.beta[0], myoutput.sd_beta[0], myoutput.beta[1], myoutput.sd_beta[1]
+    covariana_matrice = np.sqrt(np.diag(myoutput.cov_beta))
+    return myoutput.beta[0], covariana_matrice[0], myoutput.beta[1], covariana_matrice[1]
 
 
-# In[ ]:
+# # $y = bx $ : $a \equiv 0$
+
+# In[25]:
 
 
-
+def f_1(B, x):
+    '''Linear function y = m*x + b'''
+    # B is a vector of the parameters.
+    # x is an array of the current x values.
+    # x is in the same format as the x passed to Data or RealData.
+    #
+    # Return an array in the same format as y passed to Data or RealData.
+    return B[0]*x
+def linear_fit(x, y, sigma_x, sigma_y, b):
+    mydata = RealData(x, y, sx=sigma_x, sy=sigma_y)
+    linear = Model(f_1)
+    myodr = ODR(mydata, linear, beta0=[b])
+    myoutput = myodr.run()
+    myoutput.pprint()
+    covariana_matrice = np.sqrt(np.diag(myoutput.cov_beta))
+    return myoutput.beta, covariana_matrice
 
 
 # # Fit Parabolico
 
 # # $y = ax^2 + bx + c$
 
-# In[22]:
+# In[26]:
 
 
 def g(B, x):
@@ -706,10 +859,14 @@ def parabolic_fit(x, y, sigma_x, sigma_y, a, b, c):
     myodr = ODR(mydata, quadratic, beta0=[a, b, c])
     myoutput = myodr.run()
     myoutput.pprint()
-    return myoutput.beta[0], myoutput.sd_beta[0], myoutput.beta[1], myoutput.sd_beta[1], myoutput.beta[2], myoutput.sd_beta[2]
+    covariana_matrice = myoutput.cov_beta
+    sigma_diagonale = np.sqrt(np.diag(myoutput.cov_beta))
+#     return myoutput.beta[0], myoutput.sd_beta[0], myoutput.beta[1], myoutput.sd_beta[1], myoutput.beta[2], myoutput.sd_beta[2]
+    return myoutput.beta[0], sigma_diagonale[0], myoutput.beta[1], sigma_diagonale[1], myoutput.beta[2], sigma_diagonale[2], covariana_matrice[0][1]
+    
 
 
-# In[23]:
+# In[27]:
 
 
 def max_quadratic(a, b, c):
@@ -718,15 +875,129 @@ def max_quadratic(a, b, c):
     return (y_max, x_max)
 
 
+# In[28]:
+
+
+def sigma_max_quadratic(a, sigma_a, b, sigma_b, c, sigma_c, covarianza_a_b):
+    sigma_x = m.sqrt(((-b/(2*a))**2)*((sigma_a/a)**2 + (sigma_b/b)**2) - 2*b/(4*a**3)*covarianza_a_b)
+    sigma_y = 0 # ToDo
+#     var_x = (((-b/(2*a))**2)*((sigma_a/a)**2 + (sigma_b/b)**2) - 2*b/(4*a**3)*covarianza_a_b)
+    return sigma_y, sigma_x
+
+
 # In[ ]:
 
 
 
 
 
+# # Fit Polinomiale
+
+# In[29]:
+
+
+def polinomial_fit(x, y, sigma_x, sigma_y, parametri, g):
+    mydata = RealData(x, y, sx=sigma_x, sy=sigma_y)
+    quadratic = Model(g)
+    myodr = ODR(mydata, quadratic, beta0=parametri)
+    myoutput = myodr.run()
+    myoutput.pprint()
+    return myoutput.beta, np.sqrt(np.diag(myoutput.cov_beta))
+
+
+# In[30]:
+
+
+# def max_polinomial():
+#     pass
+
+
+# In[31]:
+
+
+from sympy import *
+def sigma_max_polinomial(parametro1, sigma_parametro1, parametro2, sigma_parametro2, parametro3, sigma_parametro3, parametro4, sigma_parametro4, covarianza_matrice):
+    x, a, b, c, d = sp.symbols('x, a, b, c, d', real=True) 
+    q = d/a -(b*c)/(3*a**2) + (2*b**3)/(27*a**3)
+    p = c/a - (b**2)/(3*a**2)
+    x = -b/(3*a) + (-(d/a -(b*c)/(3*a**2) + (2*b**3)/(27*a**3))/2 + ((((d/a -(b*c)/(3*a**2) + (2*b**3)/(27*a**3))**2)/4 + (c/a - (b**2)/(3*a**2))**3/27))**(1/2))**(1/3) + (-(d/a -(b*c)/(3*a**2) + (2*b**3)/(27*a**3))/2 - ((((d/a -(b*c)/(3*a**2) + (2*b**3)/(27*a**3))**2)/4 + (c/a - (b**2)/(3*a**2))**3/27))**(0.5))**(1/3)
+    x_prime_a = x.diff(a)
+    x_prime_b = x.diff(b)
+    x_prime_c = x.diff(c)
+    x_prime_d = x.diff(d)
+    x_prime_a_value = x_prime_a.subs([(a, parametro1), (b, parametro2), (c, parametro3), (d, parametro4)])
+    x_prime_b_value = x_prime_b.subs([(a, parametro1), (b, parametro2), (c, parametro3), (d, parametro4)])
+    x_prime_c_value = x_prime_c.subs([(a, parametro1), (b, parametro2), (c, parametro3), (d, parametro4)])
+    x_prime_d_value = x_prime_d.subs([(a, parametro1), (b, parametro2), (c, parametro3), (d, parametro4)])
+    
+    var_x = 0
+    
+    var_x += ((x_prime_a_value)*sigma_parametro1)**2
+    var_x += ((x_prime_b_value)*sigma_parametro2)**2
+    var_x += ((x_prime_c_value)*sigma_parametro3)**2
+    var_x += ((x_prime_d_value)*sigma_parametro4)**2
+    var_x += 2*x_prime_a_value*x_prime_b_value*covarianza_matrice[0][1]
+    var_x += 2*x_prime_a_value*x_prime_c_value*covarianza_matrice[0][2]
+    var_x += 2*x_prime_a_value*x_prime_d_value*covarianza_matrice[0][3]
+    var_x += 2*x_prime_b_value*x_prime_c_value*covarianza_matrice[1][2]
+    var_x += 2*x_prime_b_value*x_prime_d_value*covarianza_matrice[1][3]
+    var_x += 2*x_prime_c_value*x_prime_d_value*covarianza_matrice[2][3]
+#     print("La varianza complessa vale:", N(var_x))
+    sigma_x = var_x**(0.5)
+#     print("La deviazione standard complessa vale:", N(sigma_x))
+    return N((re(sigma_x)**2 + im(sigma_x)**2)**(0.5))
+
+
+# In[ ]:
+
+
+
+
+
+# # Ricerca del minimo/massimo di un fit parabolico
+
+# In[32]:
+
+
+def ricerca_minimo(y, sigma_y, x): 
+    #Nota Bene: le derivate vengono calcolate per n-2 punti, quindi gliene servono almeno 5 in entrata (ma gli estremi non sono considerati). 
+    #Funziona per interpolazione della derivata, per cui se la relazione non è parabolica dà risultati approssimati
+    d=[]
+    d_x=[]
+    h=(x[1]-x[0]) 
+    sigma_d=2**0.5*sigma_y/h
+
+    for i in range(1,len(y)-1):
+        
+        this_d=(y[i+1]-y[i-1])/h  #Calcolo delle derivate con il metodo delle differenze finite
+        d.append(this_d)
+        d_x.append(x[i])
+        
+    N = len(d)
+    x_quadri, x_singoli, d_singoli, x_per_d = 0, 0, 0, 0
+    for i in range (0,len(d)):
+        x_quadri += pow(d_x[i],2)
+        x_singoli += d_x[i]
+        d_singoli += d[i]
+        x_per_d += d[i]*d_x[i]
+
+    delta = N*x_quadri -pow(x_singoli,2)
+    a = (x_quadri*d_singoli-x_singoli*x_per_d)/delta
+    b = (N*x_per_d-x_singoli*d_singoli)/delta
+    errore_a = sigma_d*(x_quadri/delta)**0.5
+    errore_b = sigma_d*(N/delta)**0.5
+    x_min=(-a/b)
+    err_x=((errore_a/a)**2+(errore_b/b)**2)**0.5/x_min
+    output = 'Il minimo ha coordinata x ' + str(x_min) + '\ned errore ' + str(err_x)
+    return (output)
+    
+    
+    
+
+
 # # Scrittura su file
 
-# In[24]:
+# In[33]:
 
 
 def scrittura(nome_file, contenuto):
@@ -750,7 +1021,7 @@ def scrittura_aggiunta(nome_file, contenuto):
 
 # # Importare da Excel
 
-# In[25]:
+# In[34]:
 
 
 import openpyxl
@@ -770,7 +1041,7 @@ def excel_import(nome_file:str, start, stop, col):
 
 # # Leggi file
 
-# In[26]:
+# In[35]:
 
 
 def text(nome_file:str):
